@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Finder Pro</title>
+  <style>
+    
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    header .header-content h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    header .header-content p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    header .search-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header .search-bar input {
+      padding: 10px;
+      width: 60%;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    header .search-bar button {
+      padding: 10px 20px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    header .search-bar button:hover {
+      background-color: #003d80;
+    }
+
+    .filters {
+      padding: 20px;
+      margin: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .filters h2 {
+      margin-bottom: 20px;
+    }
+
+    .filters .filter-group {
+      margin-bottom: 15px;
+    }
+
+    .filters .filter-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .filters .filter-group input,
+    .filters .filter-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+    }
+
+    .filters button {
+      width: 100%;
+      padding: 10px 20px;
+      background: #4facfe;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .filters button:hover {
+      background: #0056b3;
+    }
+
+    .job-results {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .job-results h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #4facfe;
+    }
+
+    #jobs-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .job-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: left;
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .job-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .job-card h3 {
+      margin: 0 0 10px;
+      color: #0056b3;
+    }
+
+    .job-card p {
+      margin: 5px 0;
+      font-size: 0.9rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: #333;
+      color: white;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+      
+    }
+    nav ul li {
+      display: inline;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1rem;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background 0.3s ease-in-out;
+    }
+    nav ul li a {
+      background: #4facfe;
+      align-text: right;
+    }
+
+    .images-section img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+<nav><ul><li><a href="about-me.html" id="about me">About me</a></li></ul></nav>
+      <h1>Local Job Portal</h1>
+      <p>Find your dream job with ease</p>
+      <div class="search-bar">
+        <input type="text" placeholder="Search by job title or company..." id="search-input">
+        <button id="search-button">Search</button>
+      </div>
+    </div>
+  </header>
+
+  <section class="filters">
+    <h2>Filters</h2>
+    <div class="filter-group">
+      <label for="location">Location:</label>
+      <input type="text" id="location" placeholder="Enter location like Seoni, Remote, etc.">
+    </div>
+    <div class="filter-group">
+      <label for="category">Category:</label>
+      <select id="category">
+        <option value="all">All Categories</option>
+        <option value="tech">Tech</option>
+        <option value="education">Education</option>
+        <option value="marketing">Marketing</option>
+        <option value="others">Others</option>
+      </select>
+    </div>
+    <div class="filter-group">
+      <label for="qualification">Qualification:</label>
+      <select id="qualification">
+        <option value="all">All Qualifications</option>
+        <option value="bachelor">Bachelor's Degree</option>
+        <option value="master">Master's Degree</option>
+        <option value="phd">Ph.D.</option>
+        <option value="diploma">Diploma</option>
+        <option value="highschool">High School Diploma</option>
+      </select>
+    </div>
+    <button id="apply-filters">Apply Filters</button>
+  </section>
+
+  <section class="job-results">
+    <h2>Available Jobs</h2>
+    <div id="jobs-container">
+      <!-- Dynamic job cards will appear here -->
+    </div>
+  </section>
+
+  <footer>
+    <p>By Aman kumarr shende.</p>
+  </footer>
+
+  <script>
+    
+    const jobsData = [
+      {
+        title: "Software Developer",
+        companyName: "Tech Solutions Ltd.",
+        location: "Seoni",
+        category: "Tech",
+        qualifications: "Bachelor's Degree",
+        description: "We are looking for a Software Developer to join our team at Tech Solutions.",
+        contactNumber: "+91 9876543210",
+        companyEmail: "hr@techsolutions.com",
+        address: "123 Tech Road, Seoni",
+        whatsappNumber: "+91 9876543210",
+        numberOfOpenings: 5
+      },
+      {
+        title: "Marketing Specialist",
+        companyName: "Creative Minds Pvt. Ltd.",
+        location: "Remote",
+        category: "Marketing",
+        qualifications: "Master's Degree",
+        description: "Join Creative Minds as a Marketing Specialist and help us grow our brand.",
+        contactNumber: "+91 9123456789",
+        companyEmail: "careers@creativeminds.com",
+        address: "456 Brand Avenue, Remote",
+        whatsappNumber: "+91 9123456789",
+        numberOfOpenings: 3
+      },
+      {
+        title: "Graphic Designer",
+        companyName: "Design Studio",
+        location: "Mumbai",
+        category: "Tech",
+        qualifications: "Diploma",
+        description: "We are looking for a talented graphic designer with creativity and experience.",
+        contactNumber: "+91 8998765432",
+        companyEmail: "info@designstudio.com",
+        address: "789 Design Street, Mumbai",
+        whatsappNumber: "+91 8998765432",
+        numberOfOpenings: 2
+      },
+        { title: "Software Developer", companyName: "Tech Solutions Ltd.", location: "Seoni", category: "Tech", qualifications: "Bachelor's Degree", description: "We are looking for a Software Developer to join our team at Tech Solutions.", contactNumber: "+91 9876543210", companyEmail: "hr@techsolutions.com", address: "123 Tech Road, Seoni", whatsappNumber: "+91 9876543210", numberOfOpenings: 5 },
+  { title: "Marketing Specialist", companyName: "Creative Minds Pvt. Ltd.", location: "Seoni", category: "Marketing", qualifications: "Master's Degree", description: "Join Creative Minds as a Marketing Specialist and help us grow our brand.", contactNumber: "+91 9123456789", companyEmail: "careers@creativeminds.com", address: "456 Brand Avenue, Seoni", whatsappNumber: "+91 9123456789", numberOfOpenings: 3 },
+  { title: "Data Analyst", companyName: "Data Insights", location: "Seoni", category: "Tech", qualifications: "Bachelor's Degree", description: "Join Data Insights as a Data Analyst to help us unlock the power of data.", contactNumber: "+91 8001234567", companyEmail: "hr@datainsights.com", address: "202 Data Lane, Seoni", whatsappNumber: "+91 8001234567", numberOfOpenings: 6 },
+  { title: "Graphic Designer", companyName: "Creative Studio", location: "Seoni", category: "Design", qualifications: "Bachelor's Degree", description: "Looking for a creative and skilled Graphic Designer to join our team.", contactNumber: "+91 9001234567", companyEmail: "hr@creativestudio.com", address: "789 Design Plaza, Seoni", whatsappNumber: "+91 9001234567", numberOfOpenings: 4 },
+  { title: "HR Manager", companyName: "HR Excellence Group", location: "Seoni", category: "HR", qualifications: "Master's Degree", description: "Looking for a qualified HR Manager to manage recruitment and employee welfare.", contactNumber: "+91 9654321000", companyEmail: "hr@hrexcellence.com", address: "303 HR Park, Seoni", whatsappNumber: "+91 9654321000", numberOfOpenings: 2 },
+  { title: "Content Writer", companyName: "Content Creators Hub", location: "Seoni", category: "Content", qualifications: "Bachelor's Degree", description: "We are hiring a talented Content Writer to produce high-quality written content.", contactNumber: "+91 9887766555", companyEmail: "hr@contentcreators.com", address: "101 Content Lane, Seoni", whatsappNumber: "+91 9887766555", numberOfOpenings: 3 },
+  { title: "Sales Executive", companyName: "Sales Boosters Pvt. Ltd.", location: "Seoni", category: "Sales", qualifications: "Bachelor's Degree", description: "Join our team as a Sales Executive and help drive business growth.", contactNumber: "+91 9632587410", companyEmail: "sales@boosters.com", address: "404 Sales Road, Seoni", whatsappNumber: "+91 9632587410", numberOfOpenings: 8 },
+  { title: "Project Manager", companyName: "Project Pros Inc.", location: "Seoni", category: "Project Management", qualifications: "Master's Degree", description: "Looking for an experienced Project Manager to lead various project initiatives.", contactNumber: "+91 9812345678", companyEmail: "hr@projectpros.com", address: "123 Project Street, Seoni", whatsappNumber: "+91 9812345678", numberOfOpenings: 5 },
+  { title: "Web Developer", companyName: "Web Wizards Ltd.", location: "Seoni", category: "Tech", qualifications: "Bachelor's Degree", description: "We are hiring a Web Developer to work on exciting web projects.", contactNumber: "+91 9657482365", companyEmail: "hr@webwizards.com", address: "345 Web Avenue, Seoni", whatsappNumber: "+91 9657482365", numberOfOpenings: 4 },
+  { title: "Teacher", companyName: "Bright Future Academy", location: "Seoni", category: "Education", qualifications: "Bachelor's Degree", description: "We are looking for dedicated Teachers to join our educational institution.", contactNumber: "+91 7001234567", companyEmail: "careers@brightfuture.com", address: "222 Academy Road, Seoni", whatsappNumber: "+91 7001234567", numberOfOpenings: 3 },
+  { title: "Product Manager", companyName: "Product Innovators", location: "Seoni", category: "Product Management", qualifications: "Master's Degree", description: "Seeking a dynamic Product Manager to oversee product development cycles.", contactNumber: "+91 7563489521", companyEmail: "hr@productinnovators.com", address: "111 Product Lane, Seoni", whatsappNumber: "+91 7563489521", numberOfOpenings: 2 },
+  { title: "Software Engineer", companyName: "Tech Bytes", location: "Seoni", category: "Tech", qualifications: "Bachelor's Degree", description: "Looking for a talented Software Engineer to develop cutting-edge software solutions.", contactNumber: "+91 8102345678", companyEmail: "hr@techbytes.com", address: "543 Tech Road, Seoni", whatsappNumber: "+91 8102345678", numberOfOpenings: 6 },
+  { title: "Accountant", companyName: "Finance Solutions", location: "Seoni", category: "Finance", qualifications: "Bachelor's Degree", description: "We are looking for an experienced Accountant to join our team.", contactNumber: "+91 9998765432", companyEmail: "hr@financesolutions.com", address: "678 Finance Street, Seoni", whatsappNumber: "+91 9998765432", numberOfOpenings: 2 },
+  { title: "Network Engineer", companyName: "Network Solutions", location: "Seoni", category: "Tech", qualifications: "Bachelor's Degree", description: "Looking for a skilled Network Engineer to handle network installations and maintenance.", contactNumber: "+91 8337645281", companyEmail: "hr@networksolutions.com", address: "120 Network Lane, Seoni", whatsappNumber: "+91 8337645281", numberOfOpenings: 4 },
+  { title: "Digital Marketing Specialist", companyName: "Digital Gurus", location: "Seoni", category: "Marketing", qualifications: "Master's Degree", description: "Join us as a Digital Marketing Specialist to strategize and manage digital campaigns.", contactNumber: "+91 9876543210", companyEmail: "careers@digitalgurus.com", address: "234 Marketing Road, Seoni", whatsappNumber: "+91 9876543210", numberOfOpenings: 3 },
+  { title: "Business Analyst", companyName: "Business Solutions", location: "Seoni", category: "Business", qualifications: "Bachelor's Degree", description: "Looking for a Business Analyst to gather requirements and analyze business processes.", contactNumber: "+91 7456321890", companyEmail: "hr@businesssolutions.com", address: "876 Business Street, Seoni", whatsappNumber: "+91 7456321890", numberOfOpenings: 5 },
+  { title: "Financial Analyst", companyName: "Finance Experts", location: "Seoni", category: "Finance", qualifications: "Master's Degree", description: "Seeking a Financial Analyst to perform financial analysis and assist in decision making.", contactNumber: "+91 8887773333", companyEmail: "hr@financeexperts.com", address: "500 Finance Road, Seoni", whatsappNumber: "+91 8887773333", numberOfOpenings: 4 },
+  { title: "Customer Support Specialist", companyName: "Support Systems", location: "Seoni", category: "Customer Support", qualifications: "High School Diploma", description: "Join Support Systems as a Customer Support Specialist and assist customers with inquiries.", contactNumber: "+91 8007654321", companyEmail: "support@supportsystems.com", address: "111 Customer Road, Seoni", whatsappNumber: "+91 8007654321", numberOfOpenings: 3 },
+  { title: "Operations Manager", companyName: "Operations Hub", location: "Seoni", category: "Operations", qualifications: "Master's Degree", description: "We are hiring an experienced Operations Manager to oversee operations in our company.", contactNumber: "+91 9812374654", companyEmail: "hr@operationshub.com", address: "789 Operations Road, Seoni", whatsappNumber: "+91 9812374654", numberOfOpenings: 3 },
+  { title: "Architect", companyName: "Urban Design Studio", location: "Seoni", category: "Design", qualifications: "Master's Degree", description: "Looking for an innovative Architect to design state-of-the-art buildings.", contactNumber: "+91 9632147852", companyEmail: "careers@urbandesignstudio.com", address: "333 Design Avenue, Seoni", whatsappNumber: "+91 9632147852", numberOfOpenings: 2 },
+  { title: "Chef", companyName: "Gourmet Kitchen", location: "Seoni", category: "Hospitality", qualifications: "High School Diploma", description: "We are seeking an experienced Chef to join our kitchen team and prepare delicious meals.", contactNumber: "+91 8223344556", companyEmail: "hr@gourmetkitchen.com", address: "555 Culinary Lane, Seoni", whatsappNumber: "+91 8223344556", numberOfOpenings: 1 },
+  { title: "Teacher", companyName: "Global Academy", location: "Seoni", category: "Education", qualifications: "Master's Degree", description: "Join Global Academy as a Teacher and help shape the future of our students.", contactNumber: "+91 9008765432", companyEmail: "careers@globalacademy.com", address: "444 Academy Road, Seoni", whatsappNumber: "+91 9008765432", numberOfOpenings: 4 },
+  { title: "Software Tester", companyName: "TestWorks", location: "Seoni", category: "Tech", qualifications: "Bachelor's Degree", description: "We are hiring a Software Tester to ensure our products meet the highest quality standards.", contactNumber: "+91 8123456789", companyEmail: "hr@testworks.com", address: "654 Testing Road, Seoni", whatsappNumber: "+91 8123456789", numberOfOpenings: 4 },
+  { title: "Security Officer", companyName: "Safe Solutions", location: "Seoni", category: "Security", qualifications: "High School Diploma", description: "Join Safe Solutions as a Security Officer and ensure the safety of our premises.", contactNumber: "+91 9567321098", companyEmail: "hr@safesolutions.com", address: "345 Safe Road, Seoni", whatsappNumber: "+91 9567321098", numberOfOpenings: 3 },
+  { title: "Marketing Manager", companyName: "Brand Boosters", location: "Seoni", category: "Marketing", qualifications: "Master's Degree", description: "We are looking for an experienced Marketing Manager to lead our marketing campaigns.", contactNumber: "+91 8765432100", companyEmail: "careers@brandboosters.com", address: "101 Marketing Road, Seoni", whatsappNumber: "+91 8765432100", numberOfOpenings: 2 },
+  { title: "Software Developer", companyName: "Tech Innovations", location: "Bhopal", category: "Tech", qualifications: "Bachelor's Degree", description: "Join Tech Innovations as a Software Developer and be part of our cutting-edge projects.", contactNumber: "+91 9123456780", companyEmail: "hr@techinnovations.com", address: "500 Innovation Blvd, Bhopal", whatsappNumber: "+91 9123456780", numberOfOpenings: 4 },
+  { title: "Marketing Specialist", companyName: "Digital Hub", location: "Indore", category: "Marketing", qualifications: "Master's Degree", description: "Help our brand grow as a Marketing Specialist at Digital Hub.", contactNumber: "+91 9876543211", companyEmail: "careers@digitalhub.com", address: "101 Digital Park, Indore", whatsappNumber: "+91 9876543211", numberOfOpenings: 3 },
+  { title: "Financial Analyst", companyName: "Finance Leaders", location: "Nagpur", category: "Finance", qualifications: "Master's Degree", description: "Join Finance Leaders as a Financial Analyst to assist in corporate financial planning.", contactNumber: "+91 8887774444", companyEmail: "hr@financeleaders.com", address: "200 Finance Lane, Nagpur", whatsappNumber: "+91 8887774444", numberOfOpenings: 2 },
+  { title: "Data Scientist", companyName: "Data Science Labs", location: "Mumbai", category: "Tech", qualifications: "Master's Degree", description: "Join our Data Science team to build machine learning models.", contactNumber: "+91 9834567890", companyEmail: "hr@datasciencelabs.com", address: "202 ML Park, Mumbai", whatsappNumber: "+91 9834567890", numberOfOpenings: 5 },
+  { title: "Project Manager", companyName: "Innovative Solutions", location: "Pune", category: "Project Management", qualifications: "Master's Degree", description: "Looking for an experienced Project Manager to lead projects successfully.", contactNumber: "+91 9506781234", companyEmail: "careers@innovativesolutions.com", address: "456 Project Avenue, Pune", whatsappNumber: "+91 9506781234", numberOfOpenings: 2 },
+  { title: "Graphic Designer", companyName: "Design Magic", location: "Delhi", category: "Design", qualifications: "Bachelor's Degree", description: "Seeking a talented Graphic Designer to create innovative visual content.", contactNumber: "+91 9001234578", companyEmail: "hr@designmagic.com", address: "777 Design Park, Delhi", whatsappNumber: "+91 9001234578", numberOfOpenings: 4 },
+  { title: "Web Developer", companyName: "Web Crafters", location: "Chennai", category: "Tech", qualifications: "Bachelor's Degree", description: "Looking for a Web Developer to join our growing tech team.", contactNumber: "+91 9501234567", companyEmail: "hr@webcrafters.com", address: "123 Web Street, Chennai", whatsappNumber: "+91 9501234567", numberOfOpenings: 6 },
+  { title: "Content Writer", companyName: "Creative Writers", location: "Hyderabad", category: "Content", qualifications: "Bachelor's Degree", description: "We are hiring skilled Content Writers for various digital platforms.", contactNumber: "+91 7001236548", companyEmail: "hr@creativewriters.com", address: "101 Content Road, Hyderabad", whatsappNumber: "+91 7001236548", numberOfOpenings: 3 },
+  { title: "HR Manager", companyName: "HR Consultants", location: "Bengaluru", category: "HR", qualifications: "Master's Degree", description: "Looking for an experienced HR Manager to handle recruitment and employee management.", contactNumber: "+91 9602345679", companyEmail: "careers@hrconsultants.com", address: "222 HR Park, Bengaluru", whatsappNumber: "+91 9602345679", numberOfOpenings: 2 },
+  { title: "Software Engineer", companyName: "Soft Solutions", location: "Jaipur", category: "Tech", qualifications: "Bachelor's Degree", description: "We are looking for a Software Engineer to develop innovative software solutions.", contactNumber: "+91 8102345678", companyEmail: "hr@softsolutions.com", address: "200 Tech Road, Jaipur", whatsappNumber: "+91 8102345678", numberOfOpenings: 5 },
+  { title: "Operations Manager", companyName: "Operations Masters", location: "Kolkata", category: "Operations", qualifications: "Master's Degree", description: "We are looking for an Operations Manager to oversee daily operations and team management.", contactNumber: "+91 9837643210", companyEmail: "careers@operationsmasters.com", address: "456 Operations Lane, Kolkata", whatsappNumber: "+91 9837643210", numberOfOpenings: 3 },
+  { title: "Customer Support Specialist", companyName: "Support Solutions", location: "Lucknow", category: "Customer Support", qualifications: "High School Diploma", description: "We are hiring Customer Support Specialists to assist with customer inquiries.", contactNumber: "+91 9456123456", companyEmail: "support@supportsolutions.com", address: "789 Support Road, Lucknow", whatsappNumber: "+91 9456123456", numberOfOpenings: 3 },
+  { title: "Sales Executive", companyName: "Sales Pro", location: "Ahmedabad", category: "Sales", qualifications: "Bachelor's Degree", description: "Join our Sales team as a Sales Executive and contribute to business growth.", contactNumber: "+91 9876543212", companyEmail: "sales@salespro.com", address: "102 Sales Road, Ahmedabad", whatsappNumber: "+91 9876543212", numberOfOpenings: 5 },
+  { title: "Teacher", companyName: "Future Leaders Academy", location: "Bhopal", category: "Education", qualifications: "Master's Degree", description: "We are hiring Teachers to educate and inspire the next generation.", contactNumber: "+91 7002345678", companyEmail: "careers@futureleaders.com", address: "150 Academy Lane, Bhopal", whatsappNumber: "+91 7002345678", numberOfOpenings: 3 },
+  { title: "Marketing Manager", companyName: "Brand Experts", location: "Surat", category: "Marketing", qualifications: "Master's Degree", description: "We are seeking an experienced Marketing Manager to strategize and lead marketing campaigns.", contactNumber: "+91 9876543213", companyEmail: "careers@brandexperts.com", address: "205 Brand Avenue, Surat", whatsappNumber: "+91 9876543213", numberOfOpenings: 2 },
+  { title: "Network Engineer", companyName: "Tech Connect", location: "Pune", category: "Tech", qualifications: "Bachelor's Degree", description: "Looking for a skilled Network Engineer to manage network installations and troubleshoot issues.", contactNumber: "+91 8002345678", companyEmail: "hr@techconnect.com", address: "300 Network Road, Pune", whatsappNumber: "+91 8002345678", numberOfOpenings: 4 },
+  { title: "Business Analyst", companyName: "Business Analytics Corp.", location: "Mumbai", category: "Business", qualifications: "Bachelor's Degree", description: "Join us as a Business Analyst and analyze complex business data.", contactNumber: "+91 7894561230", companyEmail: "hr@businessanalytics.com", address: "100 Business Avenue, Mumbai", whatsappNumber: "+91 7894561230", numberOfOpenings: 5 },
+  { title: "Software Tester", companyName: "Testers Hub", location: "Indore", category: "Tech", qualifications: "Bachelor's Degree", description: "We are looking for a skilled Software Tester to ensure the quality of our products.", contactNumber: "+91 9223344555", companyEmail: "hr@testershub.com", address: "550 Test Road, Indore", whatsappNumber: "+91 9223344555", numberOfOpenings: 4 },
+  { title: "Financial Advisor", companyName: "Finance Experts", location: "Chennai", category: "Finance", qualifications: "Master's Degree", description: "We are seeking a Financial Advisor to provide expert financial guidance to our clients.", contactNumber: "+91 9612345678", companyEmail: "careers@financeexperts.com", address: "150 Financial Lane, Chennai", whatsappNumber: "+91 9612345678", numberOfOpenings: 3 },
+  { title: "Accountant", companyName: "Accountancy Solutions", location: "Jaipur", category: "Finance", qualifications: "Bachelor's Degree", description: "Join our team as an Accountant and manage financial transactions and reporting.", contactNumber: "+91 9505678901", companyEmail: "hr@accountancysolutions.com", address: "444 Accounting Street, Jaipur", whatsappNumber: "+91 9505678901", numberOfOpenings: 2 },
+  { title: "Security Officer", companyName: "Secure Corp", location: "Delhi", category: "Security", qualifications: "High School Diploma", description: "We are hiring Security Officers to ensure the safety and security of our premises.", contactNumber: "+91 8301234567", companyEmail: "hr@securecorp.com", address: "123 Security Lane, Delhi", whatsappNumber: "+91 8301234567", numberOfOpenings: 4 },
+  { title: "Product Manager", companyName: "Tech Innovators", location: "Bengaluru", category: "Product Management", qualifications: "Master's Degree", description: "Join our dynamic team as a Product Manager to oversee product development.", contactNumber: "+91 9534123456", companyEmail: "careers@techinnovators.com", address: "300 Product Park, Bengaluru", whatsappNumber: "+91 9534123456", numberOfOpenings: 2 },
+  { title: "Chef", companyName: "Culinary Delights", location: "Kolkata", category: "Hospitality", qualifications: "High School Diploma", description: "We are looking for an experienced Chef to join our restaurant and prepare exquisite dishes.", contactNumber: "+91 8001239876", companyEmail: "hr@culinarydelights.com", address: "200 Gourmet Road, Kolkata", whatsappNumber: "+91 8001239876", numberOfOpenings: 1 }
+
+];
+
+    
+    function displayJobs(jobs) {
+      const jobsContainer = document.getElementById('jobs-container');
+      jobsContainer.innerHTML = '';  // Clear previous jobs
+
+      if (jobs.length === 0) {
+        jobsContainer.innerHTML = '<p>No jobs found for the selected filters.</p>';
+        return;
+      }
+
+      jobs.forEach(job => {
+        const jobCard = `
+          <div class="job-card">
+            <h3>${job.title}</h3>
+            <p><strong>Company:</strong> ${job.companyName}</p>
+            <p><strong>Location:</strong> ${job.location}</p>
+            <p><strong>Category:</strong> ${job.category}</p>
+            <p><strong>Qualifications:</strong> ${job.qualifications}</p>
+            <p>${job.description}</p>
+            <p><strong>Contact:</strong> ${job.contactNumber}</p>
+            <p><strong>Email:</strong> ${job.companyEmail}</p>
+          </div>`;
+        jobsContainer.innerHTML += jobCard;
+      });
+    }
+
+    
+    function applyFilters() {
+      const locationFilter = document.getElementById('location').value.toLowerCase();
+      const categoryFilter = document.getElementById('category').value.toLowerCase();
+      const qualificationFilter = document.getElementById('qualification').value.toLowerCase();
+
+      const filteredJobs = jobsData.filter(job => {
+        const matchesLocation = locationFilter === '' || job.location.toLowerCase().includes(locationFilter);
+        const matchesCategory = categoryFilter === 'all' || job.category.toLowerCase() === categoryFilter;
+        const matchesQualification = qualificationFilter === 'all' || job.qualifications.toLowerCase().includes(qualificationFilter);
+
+        return matchesLocation && matchesCategory && matchesQualification;
+      });
+
+      displayJobs(filteredJobs);
+    }
+
+  
+    document.getElementById('apply-filters').addEventListener('click', applyFilters);
+
+    document.getElementById('search-button').addEventListener('click', () => {
+      const searchInput = document.getElementById('search-input').value.toLowerCase();
+      const searchedJobs = jobsData.filter(job =>
+        job.title.toLowerCase().includes(searchInput) || 
+        job.companyName.toLowerCase().includes(searchInput)
+      );
+      displayJobs(searchedJobs);
+    });
+
+    
+    displayJobs(jobsData);
+  </script>
+</body>
+</html>

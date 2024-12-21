@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-size: 1.5rem;
+      border-bottom: 2px solid #4facfe;
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      font-weight: bold;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    .answer {
+      display: block;
+      margin: 10px 0 20px;
+      padding: 10px;
+      background: #f8f9fa;
+      border: 1px dashed #ccc;
+      border-radius: 5px;
+      color: #666;
+      font-style: italic;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-in-out;
+    }
+
+    .visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>About Me</h1>
+  </header>
+
+  <div class="container">
+    <!-- Section 1: Personal Details -->
+    <div class="section" id="personal-details">
+      <h2>Personal Details</h2>
+      <p class="question">What is your full name?</p>
+      <p class="answer">Aman kumarr shende</p>
+
+      <p class="question">Which class and school do you study in?</p>
+      <p class="answer">Class= 10th School= C.M. Rise school keolari</p>
+
+      <p class="question">Where do you live (city/village, district)?</p>
+      <p class="answer">Keolari/Seoni</p>
+
+      <p class="question">Tell us about your family members. What do your parents do?</p>
+      <p class="answer">I have 5 members in my family Grandmother ,father(Govt. Teacher) ,Mother(Govt. Teacher) ,SmallBrother ,Me</p>
+    </div>
+
+    <!-- Section 2: Coding Journey -->
+    <div class="section" id="coding-journey">
+      <h2>My Coding Journey</h2>
+      <p class="question">Who introduced you to coding?</p>
+      <p class="answer">I got introduced by myself in class 8th and found some learning resources.</p>
+
+      <p class="question">When did you start learning to code? (Year or class)</p>
+      <p class="answer">In class 10th before a weak I completed 47th level.</p>
+
+      <p class="question">What was the first tool or language you learned?</p>
+      <p class="answer">HTML is the first tool or language then CSS ,Java script and python.</p>
+
+      <p class="question">How did you feel when you started coding?</p>
+      <p class="answer">I felt happy because I like to experience or learn something new.</p>
+    </div>
+
+    <!-- Section 3: Experience with CodeYogi -->
+    <div class="section" id="experience">
+      <h2>Experience with CodeYogi</h2>
+      <p class="question">When did you join CodeYogi?</p>
+      <p class="answer">In class 10th</p>
+
+      <p class="question">Who introduced CodeYogi to you?</p>
+      <p class="answer">By my class teacher.</p>
+
+      <p class="question">What have you learned in CodeYogi? (Tools, languages, frameworks)</p>
+      <p class="answer">HTML,CSS and Java script.</p>
+
+      <p class="question">How do you practice coding (mobile, computer)?</p>
+      <p class="answer">Mobile</p>
+    </div>
+
+    <!-- Section 4: Achievements -->
+    <div class="section" id="achievements">
+      <h2>Achievements</h2>
+      <p class="question">Have you participated in any coding-related competitions or events?</p>
+      <p class="answer">Never got informed or not happen near me.</p>
+
+      <p class="question">Have you received any awards or recognitions?</p>
+      <p class="answer">No.</p>
+
+      <p class="question">What other skills have you gained (e.g., Excel, PowerPoint)?</p>
+      <p class="answer">Python and OSINT</p>
+    </div>
+
+    <!-- Section 5: Future Plans -->
+    <div class="section" id="future-plans">
+      <h2>Future Plans</h2>
+      <p class="question">What is your dream career?</p>
+      <p class="answer">I wana be a scientist.</p>
+
+      <p class="question">Why do you want to achieve this goal?</p>
+      <p class="answer">Because I don't want to be an npc in this era.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Designed by Aman kumarr shende</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const questions = document.querySelectorAll('.question');
+      const answers = document.querySelectorAll('.answer');
+
+      questions.forEach((question, index) => {
+        setTimeout(() => question.classList.add('visible'), index * 200);
+      });
+
+      answers.forEach((answer, index) => {
+        setTimeout(() => answer.classList.add('visible'), (index + questions.length) * 200);
+      });
+    });
+  </script>
+</body>
+</html>
